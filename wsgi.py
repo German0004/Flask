@@ -1,5 +1,7 @@
 from flask import Flask, render_template
 
+from utils.view_modifiers import response
+
 app = Flask(__name__)
 
 
@@ -21,9 +23,10 @@ def get_films():
 @app.route('/')
 @app.route('/hello')
 @app.route('/hello')
+@response(template_file='hello.html')
 def index():
     films = get_films()
-    return render_template('hello.html', films=films)
+    return {'films': films}
 
 
 @app.route('/about')
